@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.dao.AdminsDao">
+	<!--根据id查询信息 -->
+	<select id="findAdminsById" parameterType="Integer"
+                           resultType="Admins">
+		select * from admins where id = #{id}
+	</select>
+	<!-- 查询所有的管理员 -->
+	<select id="findAllAdmins" parameterType="Admins"
+                           resultType="Admins">
+		select * from admins
+	</select>
+	<!-- 检验管理员 -->
+	<select id="findAdminsByPw" parameterType="String"
+		                               resultType="Admins">
+		select * from admins where adminName = #{adminName} and password =#{password}
+	</select>
+	
+	<!-- 添加管理员 -->
+	<insert id="addAdmin" parameterType="Admins">
+		insert into admins(adminName,password) values(#{adminName},#{password})
+	</insert>
+	<delete id="deleteAdmin" parameterType="Integer">
+		delete from admins where id=#{id}
+	</delete>
+	<!-- 修改管理员的信息 -->
+	<!-- 查询选中的管理员信息 -->
+	<select id="editAdmin" parameterType="Integer" resultType="Admins">
+		select * from admins where id= #{id}
+	</select>
+	<!-- 更新选中的管理员的信息 -->
+	<update id="updateAdmin" parameterType="Admins">
+		update admins set adminName=#{adminName},password=#{password} where id=#{id}
+	</update>
+</mapper>

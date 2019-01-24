@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.dao.OrdersDao">
+<!-- 创建客户订单 -->
+	<!-- <insert id="createOrder" parameterType="orders">
+	    insert into customer(
+	                    book_id,
+	                    user_id
+	             )
+	             values(#{book_id},
+	                    #{user_id}
+	            )
+	</insert> -->
+	<insert id="createOrder" parameterType="orders">
+		insert into orders(user_id,book_name,book_id,book_num,time)values(#{user_id},#{book_name},#{book_id},#{book_num},#{time})
+	</insert>
+	<!-- 删除客户订单 -->
+	<delete id="deleteOrder" parameterType="Orders">
+	   delete from orders where id=#{id} 
+	  </delete>
+<!-- 	<delete id="deleteOrder" parameterType="Integer">
+	  delete form orders where book_id=#{book_id}
+	  </delete> -->
+	  
+	  <!-- 查找所有的订单 -->
+	<select id="findallorders" parameterType="Integer" resultType="Orders">
+		select * from orders where user_id=#{user_id}
+	</select>
+	 <!-- 修改的订单   -->
+	 <update id="updateOrdersNumber" parameterType="orders">
+		update orders 
+		<set>
+		    <if test="book_num!=null">
+		       book_num=#{book_num},
+		       </if>
+		</set>
+		where id=#{orders_id}
+		        
+	</update>
+	  <!-- 用戶購買 -->
+	   <!-- 查找所有该id用户的订单分页用 -->
+	<select id="findAllOrders" parameterType="Integer" resultType="Orders">
+		<!-- select * from orders where user_id=#{user_id} <if test="start !=null and rows != null">limit #{start},#{rows}</if> -->
+		select orders.*,books.price from orders,books where user_id=#{user_id} and books.id = orders.book_id order by time desc<if test="start !=null and rows != null">limit #{start},#{rows}</if>
+	</select>
+	<select id="findOrdersCount" parameterType="orders" resultType="Integer">
+		select count(*) from orders 
+	</select>
+	 <!-- 购物车操作 -->
+	<!-- 删除客户订单 -->
+<!-- <delete parameterType="Orders" id="deleteOrder">delete from orders where id=#{id} </delete> -->
+	 <!-- 查询购物车-->
+	 
+</mapper>

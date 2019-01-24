@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.dao.UsersDao">
+	<!--根据id查询客户信息 -->
+	<select id="findUsersById" parameterType="Integer"
+		                               resultType="Users">
+		select * from users where id = #{id}
+	</select>
+	<insert id="addUsers" parameterType="Users">
+		insert into users(userName,password,phone,address) values(#{userName},#{password},#{phone},#{address})
+	</insert>
+	
+		<!--根据id查询客户信息 -->
+	<select id="findUsersByPw" parameterType="String"
+		                               resultType="Users">
+		select * from users where userName = #{userName} and password =#{password}
+	</select>
+	<!-- 查询所有的用户 -->
+	<select id="findAllUsers" parameterType="Users"
+                           resultType="Users">
+		select * from users
+	</select>
+	<!-- 删除用户 -->
+	<delete id="deleteUser" parameterType="Integer">
+		delete from users where id=#{id}
+	</delete>
+	
+	
+	
+<!-- 	<select id="getOrder" parameterType="String"
+		                               resultType="String">
+		select car from users where userName = #{userName}	                               
+	</select> -->
+<!-- 	<update id="intoOrder" parameterType="Users">
+		update users set car=#{car} where userName = #{userName}
+	</update> -->
+</mapper>

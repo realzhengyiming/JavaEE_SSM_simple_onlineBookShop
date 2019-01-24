@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.dao.ItemsDao">
+ <insert id="intoOrder" parameterType="Items">
+	 	insert into items(userName,bookName,bookId,bookNum,bookPrice,bookPhoto) values(#{userName},#{bookName},#{bookId},#{bookNum},#{bookPrice},#{bookPhoto})
+	 </insert>
+	 <select id="getCarByUser" parameterType="String" resultType="Items">
+	 	select * from items where userName =#{userName}
+	 </select> 
+	 <!-- 进行购物车表items表的信息 -->
+	 <delete id="deleteCar" parameterType="Integer">
+	 	delete  from items where id=#{id}
+	 </delete>
+	 <!-- 用户购买之后更新库存 -->
+	<update id="updateBookNumber" parameterType="Items">
+		update books set number=#{number} where id=#{id}
+	</update>	
+</mapper>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.dao.BooksDao">
+	<!-- 查找所有的书籍 -->
+	<select id="findAllBooks" parameterType="Books" resultType="Books">
+		select * from books order by id desc<if test="start !=null and rows != null">limit #{start},#{rows}</if>
+	</select>
+	<select id="findBooksCount" parameterType="Books" resultType="Integer">
+		select count(*) from books
+	</select>
+	<!--根据id查询客户信息 -->
+	<select id="findBooksById" parameterType="Integer"
+                           resultType="Books">
+		select * from books where id = #{id}
+	</select>
+	<!-- 根据书名来查询书籍 -->
+	<select id="findBooksByBookName" parameterType="String" resultType="Books">
+		select * from books where bookName LIKE  "%"#{bookName} "%";
+	</select>
+	<!-- 查询属鸡的现有库存 -->
+	<select id="findBookNumber" parameterType="Integer" resultType="Integer">
+		select number from books where id=#{id}
+	</select>	
+	<!-- 购买后更新库存 -->
+	<update parameterType="Integer" id="updateBookNum">update books set number=#{restNum} where id= #{id} </update>
+	
+	
+	<!-- 添加模块 -->
+	<insert id="addBook" parameterType="Books">
+		insert into books(bookName,photo,author,publisher,kind,describes,number,price) values(#{bookName},#{photo},#{author},#{publisher},#{kind},#{describes},#{number},#{price})
+	</insert>
+	<!-- 删除模块 -->
+	<!-- 根据id删除书籍 -->
+	<delete id="deleteBook" parameterType="Integer">
+		delete from books where id=#{id}
+	</delete>
+	
+	<!-- 后台修改书籍 -->
+	<update id="editBook" parameterType="Books">
+		update books set bookName=#{bookName},photo=#{photo},author=#{author},publisher=#{publisher},kind=#{kind},describes=#{describes},number=#{number},price=#{price} where id=#{id}
+	</update>
+	
+	
+	
+	
+	
+	
+</mapper>
