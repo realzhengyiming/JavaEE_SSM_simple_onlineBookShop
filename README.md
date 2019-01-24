@@ -1,4 +1,4 @@
-## Here is a simple ssm project made by me and my friends(mfq and the zhizhen) for finishing the work of "javaEE".
+## 🙃Here is a simple ssm project made by me and my friends(mfq and the zhizhen) for finishing the work of "javaEE".
 even we have three people to make it,but this project havn't used the git to combine three parts of the project.
 So we wasted too much time in combining our project .That's why  I learn the git and the github to avoid the same sitution.
 
